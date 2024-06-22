@@ -15,7 +15,8 @@ services:
      # - mysql_data:/var/lib/mysql
     #  - ./localhost.sql:/docker-entrypoint-initdb.d/localhost.sql
      # - ./db:/docker-entrypoint-initdb.d
-       - $PWD/localhost.sql:/docker-entrypoint-initdb.d/localhost.sql
+     #  - $PWD/localhost.sql:/docker-entrypoint-initdb.d/localhost.sql
+        - ./data/localhost.sql:/docker-entrypoint-initdb.d/localhost.sql
 
     #  - ./db/my.cnf:/etc/mysql/my.cnf
 
