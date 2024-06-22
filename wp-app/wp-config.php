@@ -21,8 +21,7 @@
 
 // ** Database settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define('WP_HOME','http://192.168.0.7');
-define('WP_SITEURL','http://192.168.0.7');
+
 
 define( 'DB_NAME', 'local' );
 
