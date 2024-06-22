@@ -1,24 +1,46 @@
 version: '3.8'
-
+#data to C:\wp\data
 services:
+  wp:
+    image: wordpress:latest # https://hub.docker.com/_/wordpress/
+    ports:
+      - 80:80 
+    volumes:
+
+      - C:/wp/wp-app:/var/www/html # Full wordpress project
+      #- ./plugin-name/trunk/:/var/www/html/wp-content/plugins/plugin-name # Plugin development
+      #- ./theme-name/trunk/:/var/www/html/wp-content/themes/theme-name # Theme development
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_NAME: local
+   #   WORDPRESS_DB_USER: myuser
+    #  WORDPRESS_DB_PASSWORD: password
+     # WORDPRESS_CONFIG_EXTRA: |
+     #          define('WP_HOME','http://localhost');
+     #          define('WP_SITEURL','http://localhost');
+    depends_on:
+      - db
+    links:
+      - db
   db:
     image: mysql:8
 
     environment:
-      MYSQL_ROOT_PASSWORD: secure_password
-      MYSQL_DATABASE: localhost
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: local
       MYSQL_USER: myuser
       MYSQL_PASSWORD: password
     ports:
       - "3306:3306"
     volumes:
-     # - mysql_data:/var/lib/mysql
-    #  - ./localhost.sql:/docker-entrypoint-initdb.d/localhost.sql
-     # - ./db:/docker-entrypoint-initdb.d
-     #  - $PWD/localhost.sql:/docker-entrypoint-initdb.d/localhost.sql
-        - ./data/localhost.sql:/docker-entrypoint-initdb.d/localhost.sql
 
-    #  - ./db/my.cnf:/etc/mysql/my.cnf
-
+        - C:/wp/data/local.sql:/docker-entrypoint-initdb.d/local.sql
+  phpmyadmin:
+       image: phpmyadmin
+        
+       ports:
+           - 81:80
+       environment:
+           - PMA_ARBITRARY=1
 volumes:
   mysql_data:
