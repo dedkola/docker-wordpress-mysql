@@ -36,7 +36,7 @@ services:
        image: phpmyadmin
         
        ports:
-           - 81:80
+           - 81:81
        environment:
            - PMA_ARBITRARY=1
 volumes:
