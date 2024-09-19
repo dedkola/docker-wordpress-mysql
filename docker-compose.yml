@@ -1,5 +1,4 @@
 version: '3.8'
-#data to C:\wp\data
 services:
   wp:
     image: wordpress:latest # https://hub.docker.com/_/wordpress/
@@ -8,13 +7,11 @@ services:
     volumes:
 
       - ./wp-app:/var/www/html # Full wordpress project
-      #- ./plugin-name/trunk/:/var/www/html/wp-content/plugins/plugin-name # Plugin development
-      #- ./theme-name/trunk/:/var/www/html/wp-content/themes/theme-name # Theme development
     environment:
       WORDPRESS_DB_HOST: db
       WORDPRESS_DB_NAME: local
-   #   WORDPRESS_DB_USER: myuser
-    #  WORDPRESS_DB_PASSWORD: password
+      WORDPRESS_DB_USER: myuser
+      WORDPRESS_DB_PASSWORD: password
     #  WORDPRESS_CONFIG_EXTRA: |
     #           define('WP_HOME','http://localhost');
     #           define('WP_SITEURL','http://localhost');
